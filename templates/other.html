@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Other</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #ffffff; /* White background */
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar {
+        display: flex;
+        background-color: rgba(37, 170, 106, 0.626); /* Pastel Mint */
+        padding: 15px;
+        color: white;
+        justify-content: space-around;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar a {
+        color: black;
+        text-decoration: none;
+        padding: 10px 15px;
+        display: inline-block;
+        font-weight: bold;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .navbar a:hover {
+        background-color: white; /* Pastel Teal */
+        color: black;
+      }
+      body {
+        background-image: url("/static/background.jpg"); /* Replace with your image URL */
+        background-size: 1280px 750px; /* Ensure the image covers the whole page */
+        background-repeat: no-repeat; /* Prevent image tiling */
+        background-position: center center; /* Center the image */
+        margin: 0;
+        padding: 0;
+      }
+      .header {
+        color: black;
+        padding: 40px;
+        text-align: center;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 2.5em;
+      }
+
+      .header p {
+        margin: 10px 0 0;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      .content {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .content p {
+        color: black; /* Soft dark gray for readability */
+        font-size: 1.1em;
+        line-height: 1.6;
+      }
+      .content-container {
+        display: flex; /* Use flexbox to align items side by side */
+        align-items: flex-start; /* Align items to the start (top) */
+        justify-content: flex-start; /* Align items to the start (left) */
+        margin: 20px;
+        margin-top: 0;
+        padding: 20px;
+        background-color: #ffffff; /* White background */
+        border-radius: 10px; /* Optional: Add rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+      }
+
+      .image-wrapper {
+        flex: 0 1 auto; /* Allow the image to take up as much space as needed */
+        max-width: 150px; /* Set a maximum width for the image */
+        margin-right: 20px; /* Add some space between the image and the text */
+      }
+
+      .side-image {
+        width: 100%; /* Ensure the image scales to the max-width */
+        height: auto; /* Maintain the aspect ratio */
+        border: 5px solid black; /* Add a pastel mint border */
+        border-radius: 10px; /* Optional: Add rounded corners */
+      }
+
+      .text-wrapper {
+        flex: 1; /* Allow the text wrapper to take up the remaining space */
+      }
+
+      .text-wrapper p {
+        color: black; /* Soft dark gray for readability */
+        font-size: 1.1em;
+        line-height: 1.6;
+        text-align: justify;
+        margin-left: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="/">Home</a>
+      <a href="/recognize">Recognize</a>
+      <a href="/pet">PET</a>
+      <a href="/hdpe">HDPE</a>
+      <a href="/pvc">PVC</a>
+      <a href="/ldpe">LDPE</a>
+      <a href="/pp">PP</a>
+      <a href="/ps">PS</a>
+      <a href="/other">Other</a>
+    </div>
+
+    <div class="header">
+      <h1>O</h1>
+      <p>Other</p>
+    </div>
+    <div class="content-container">
+      <div class="image-wrapper">
+        <img
+          src="/static/other.png"
+          alt="Description of the image"
+          class="side-image"
+        />
+      </div>
+      <div class="text-wrapper">
+        <p>
+          Plastic type 7, classified as "Other", encompasses a variety of
+          plastics not included in the primary categories 1 through 6. This
+          category often includes materials like polycarbonate and acrylic,
+          which are used in items such as eyewear lenses, water bottles, and
+          display cases. Because it covers a wide range of plastics with
+          different properties, recycling facilities may face challenges in
+          processing these materials. Consequently, not all recycling programs
+          accept plastics labeled as type 7, so it's essential to check with
+          local waste management services for appropriate disposal
+          options. Proper identification and disposal are crucial to
+          ensure these materials are handled correctly and do not contribute to
+          environmental waste.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

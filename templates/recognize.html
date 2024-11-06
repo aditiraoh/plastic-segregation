@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Resin Code Recognizer</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-image: url("/static/background.jpg");
+        background-size: 100% 200%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: scroll;
+        margin: 0;
+        padding: 0;
+        color: black;
+      }
+
+      .navbar {
+        display: flex;
+        background-color: rgba(37, 170, 106, 0.626);
+        padding: 15px;
+        color: white;
+        justify-content: space-around;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar a {
+        color: black;
+        text-decoration: none;
+        padding: 10px 15px;
+        display: inline-block;
+        font-weight: bold;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .navbar a:hover {
+        background-color: white;
+        color: black;
+      }
+
+      .header {
+        color: black;
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 20px;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 2.5em;
+      }
+
+      .header p {
+        margin: 10px 0 0;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      .content {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .content p {
+        color: black;
+        font-size: 1.1em;
+        line-height: 1.6;
+      }
+
+      .content-container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin: 20px;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .image-wrapper {
+        flex: 0 1 auto;
+        max-width: 150px;
+        margin-right: 20px;
+      }
+
+      .side-image {
+        width: 100%;
+        height: auto;
+        border: 5px solid black;
+        border-radius: 10px;
+      }
+
+      .text-wrapper {
+        flex: 1;
+      }
+
+      .text-wrapper p {
+        color: black;
+        font-size: 1.1em;
+        line-height: 1.6;
+        text-align: justify;
+      }
+
+      .upload-box {
+        margin: 20px auto;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 800px;
+        text-align: center;
+      }
+
+      .upload-container {
+        margin: 10px 0;
+      }
+
+      .upload-label {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .upload-label:hover {
+        background-color: #218838;
+      }
+
+      #imageUpload {
+        display: none;
+      }
+
+      .image-preview {
+        margin-top: 20px;
+      }
+
+      .image-preview img {
+        max-width: 100%;
+        border-radius: 10px;
+        border: 2px solid black;
+      }
+
+      .output-container {
+        margin-top: 20px;
+      }
+
+      #outputText {
+        font-size: 18px;
+        color: black;
+        font-weight: bold;
+      }
+
+      .video-container {
+        margin: 20px 0;
+      }
+
+      #videoElement {
+        width: 100%;
+        max-width: 500px;
+        border: 5px solid black;
+        border-radius: 10px;
+      }
+
+      .capture-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      .capture-btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="/">Home</a>
+      <a href="/recognize">Recognize</a>
+      <a href="/pet">PET</a>
+      <a href="/hdpe">HDPE</a>
+      <a href="/pvc">PVC</a>
+      <a href="/ldpe">LDPE</a>
+      <a href="/pp">PP</a>
+      <a href="/ps">PS</a>
+      <a href="/other">Other</a>
+    </div>
+
+    <div class="header">
+      <h1>Resin Code Recognizer</h1>
+      <p>Upload the image you wish to recognize</p>
+    </div>
+
+    <div class="upload-box">
+      <div class="upload-container">
+        <input type="file" id="imageUpload" accept="image/*" />
+        <label for="imageUpload" class="upload-label">Choose an Image</label>
+      </div>
+      <div class="image-preview">
+        <img id="uploadedImage" src="" alt="" />
+      </div>
+      <div class="output-container">
+        <p id="outputText"></p>
+      </div>
+    </div>
+
+    <div class="header">
+      <h1>Capture Real-time Image</h1>
+      <p>Capture an image using your webcam</p>
+    </div>
+
+    <div class="video-container">
+      <video id="videoElement" autoplay></video>
+      <button class="capture-btn" id="captureButton">Capture Image</button>
+      <canvas id="canvas" style="display:none;"></canvas>
+    </div>
+
+    <div class="image-preview">
+      <img id="capturedImage" src="" alt="" />
+    </div>
+
+    <script>
+      // Handle image upload
+      document
+        .getElementById("imageUpload")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              document.getElementById("uploadedImage").src = e.target.result;
+              document.getElementById("outputText").textContent =
+                "Processing...";
+
+              // Send the file to the server for processing
+              const formData = new FormData();
+              formData.append("file", file);
+
+              fetch("/upload", {
+                method: "POST",
+                body: formData,
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  if (data.prediction) {
+                    document.getElementById(
+                      "outputText"
+                    ).textContent = `Prediction: ${data.prediction}`;
+                  } else if (data.error) {
+                    document.getElementById(
+                      "outputText"
+                    ).textContent = `Error: ${data.error}`;
+                  }
+                })
+                .catch((error) => {
+                  document.getElementById(
+                    "outputText"
+                  ).textContent = `Error: ${error.message}`;
+                });
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+      // Handle webcam feed and capture
+      const video = document.getElementById("videoElement");
+      const canvas = document.getElementById("canvas");
+      const capturedImage = document.getElementById("capturedImage");
+
+      // Get access to the camera
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices
+          .getUserMedia({ video: true })
+          .then(function (stream) {
+            video.srcObject = stream;
+            video.play();
+          });
+      }
+
+      // Capture a frame from the video
+      document.getElementById("captureButton").addEventListener("click", function () {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext("2d").drawImage(video, 0, 0);
+        const dataUrl = canvas.toDataURL("image/png");
+
+        capturedImage.src = dataUrl;
+        document.getElementById("outputText").textContent = "Processing...";
+
+        // Send the captured image to the server for processing
+        fetch(dataUrl)
+          .then((res) => res.blob())
+          .then((blob) => {
+            const formData = new FormData();
+            formData.append("file", blob, "captured.png");
+
+            fetch("/upload", {
+              method: "POST",
+              body: formData,
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.prediction) {
+                  document.getElementById(
+                    "outputText"
+                  ).textContent = `Prediction: ${data.prediction}`;
+                } else if (data.error) {
+                  document.getElementById(
+                    "outputText"
+                  ).textContent = `Error: ${data.error}`;
+                }
+              })
+              .catch((error) => {
+                document.getElementById(
+                  "outputText"
+                ).textContent = `Error: ${error.message}`;
+              });
+          });
+      });
+    </script>
+  </body>
+</html>

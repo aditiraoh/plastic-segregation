@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Resin Code Recognizer</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #ffffff; /* White background */
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar {
+        display: flex;
+        background-color: rgba(37, 170, 106, 0.626); /* Pastel Mint */
+        padding: 15px;
+        color: white;
+        justify-content: space-around;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar a {
+        color: black;
+        text-decoration: none;
+        padding: 10px 15px;
+        display: inline-block;
+        font-weight: bold;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .navbar a:hover {
+        background-color: white; /* Pastel Teal */
+        color: black;
+      }
+      body {
+        background-image: url("/static/background.jpg"); /* Replace with your image URL */
+        background-size: cover; /* Ensure the image covers the whole page */
+        background-repeat: no-repeat; /* Prevent image tiling */
+        background-position: center center; /* Center the image */
+        background-attachment: scroll;
+        margin: 0;
+        padding: 0;
+      }
+      .header {
+        color: black;
+        padding: 40px;
+        text-align: center;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 2.5em;
+      }
+
+      .header p {
+        margin: 10px 0 0;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      .content {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .content p {
+        color: black; /* Soft dark gray for readability */
+        font-size: 1.1em;
+        line-height: 1.6;
+      }
+      .image-container {
+        text-align: center; /* Center the image horizontally */
+        margin-bottom: 10px;
+      }
+
+      .centered-image {
+        max-width: 75%; /* Ensure the image scales responsively */
+        height: auto; /* Maintain the aspect ratio */
+        display: inline-block; /* Align the image to the center */
+        border: 5px solid black; /* Add a pastel mint border */
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="/">Home</a>
+      <a href="/recognize">Recognize</a>
+      <a href="/pet">PET</a>
+      <a href="/hdpe">HDPE</a>
+      <a href="/pvc">PVC</a>
+      <a href="/ldpe">LDPE</a>
+      <a href="/pp">PP</a>
+      <a href="/ps">PS</a>
+      <a href="/other">Other</a>
+    </div>
+
+    <div class="header">
+      <h1>Welcome to the Resin Code Recognizer</h1>
+      <p>Discover and Learn About Resin Codes</p>
+    </div>
+    <div class="image-container">
+      <img
+        src="/static/types_3.png"
+        alt="Description of the image"
+        class="centered-image"
+      />
+    </div>
+  </body>
+</html>
